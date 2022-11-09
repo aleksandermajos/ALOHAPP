@@ -25,13 +25,13 @@ def make_order(words):
 
 
 
-hsk1 = load_words('DATA/CHINESE_HSK1.xlsx')
-hsk2 = load_words('DATA/CHINESE_HSK2.xlsx')
-hsk3 = load_words('DATA/CHINESE_HSK3.xlsx')
-hsk4 = load_words('DATA/CHINESE_HSK4.xlsx')
-hsk5 = load_words('DATA/CHINESE_HSK5.xlsx')
-hsk6 = load_words('DATA/CHINESE_HSK6.xlsx')
-hsk7_8_9 = load_words('DATA/CHINESE_HSK7_8_9.xlsx')
+hsk1 = load_words('code/DATA/CHINESE_HSK1.xlsx')
+hsk2 = load_words('code/DATA/CHINESE_HSK2.xlsx')
+hsk3 = load_words('code/DATA/CHINESE_HSK3.xlsx')
+hsk4 = load_words('code/DATA/CHINESE_HSK4.xlsx')
+hsk5 = load_words('code/DATA/CHINESE_HSK5.xlsx')
+hsk6 = load_words('code/DATA/CHINESE_HSK6.xlsx')
+hsk7_8_9 = load_words('code/DATA/CHINESE_HSK7_8_9.xlsx')
 
 hsk1 = make_order(hsk1)
 hsk2 = make_order(hsk2)
