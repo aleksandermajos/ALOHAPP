@@ -2,7 +2,8 @@ import os
 import subprocess
 
 current_path = os.getcwd()
-learning_path = '../DATA/PHRASES/LEARNING'
+lang = 'French'
+learning_path = '../DATA/PHRASES/LEARNING/'+lang
 
 def get_all_names(path):
     d = os.listdir(path)

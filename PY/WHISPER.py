@@ -5,7 +5,7 @@ import re
 from FILES import get_all_names
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-lang = 'German'
+lang = 'Spanish'
 learning_path = '../DATA/PHRASES/LEARNING/'+lang
 
 def transcribe_all_in_dir(path):
@@ -16,7 +16,7 @@ def transcribe_all_in_dir(path):
     list_of_files = get_all_names(path)
     for name in list_of_files:
         filename, file_extension = os.path.splitext(name)
-        if file_extension == '.wav':
+        if file_extension == '.mp3':
             full_input_path = path + '/' + name
             transcription = model.transcribe(full_input_path, **transcribe_options)["text"]
             translation = model.transcribe(full_input_path, **translate_options)["text"]
