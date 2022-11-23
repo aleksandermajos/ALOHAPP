@@ -2,7 +2,10 @@ import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
 from PyQt6.QtGui import QPixmap, QAction, QIcon
 from PyQt6.QtCore import Qt
+from AUDIO import rec_fix_time
+from WHISPER import transcribe_all_in_dir
 
+rec_fix_path = "../DATA/PHRASES/SPEAKING/"
 
 
 class MainWindow(QWidget):
@@ -21,8 +24,8 @@ class MainWindow(QWidget):
 
         self.lbl = QLabel(self)
         qle = QLineEdit(self)
-        qle.move(60, 100)
-        self.lbl.move(60, 40)
+        qle.move(60, 110)
+        qle.resize(140,20)
         qle.textChanged[str].connect(self.onChanged)
 
         self.show()
@@ -31,7 +34,7 @@ class MainWindow(QWidget):
         self.times_pressed_buttonrec = 1
 
         self.buttonrec = QPushButton("PUSH TO RECORD", self)
-        self.buttonrec.move(80, 70)
+        self.buttonrec.move(60, 70)
         self.buttonrec.clicked.connect(self.buttonClicked)
 
     def buttonClicked(self):
@@ -39,9 +42,13 @@ class MainWindow(QWidget):
         if (self.times_pressed_buttonrec % 2) != 0:
             self.buttonrec.setText("START RECORDING")
             self.buttonrec.adjustSize()
+
+
         if (self.times_pressed_buttonrec % 2) == 0:
             self.buttonrec.setText("STOP RECORDING")
             self.buttonrec.adjustSize()
+            rec_fix_time(10)
+            transcribe_all_in_dir(rec_fix_path)
 
     def onChanged(self, text):
         self.lbl.setText(text)
