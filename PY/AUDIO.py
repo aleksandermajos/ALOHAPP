@@ -1,46 +1,53 @@
 import pyaudio
 import wave
 
-def rec_fix_time(length):
-    chunk = 1024  # Record in chunks of 1024 samples
-    sample_format = pyaudio.paInt16  # 16 bits per sample
-    channels = 2
-    fs = 44100  # Record at 44100 samples per second
-    seconds = length
-    filename = "../DATA/PHRASES/SPEAKING/rec_fix.wav"
+class Recorder():
 
-    p = pyaudio.PyAudio()  # Create an interface to PortAudio
+    def __init__(self,length=10,path="../DATA/PHRASES/SPEAKING/",file='polish666.wav'):
+        self.length = length
+        self.chunk = 1024  # Record in chunks of 1024 samples
+        self.sample_format = pyaudio.paInt16  # 16 bits per sample
+        self.channels = 2
+        self.fs = 44100  # Record at 44100 samples per second
+        self.seconds = length
+        self.path = path
+        self.file = file
+        self.p = pyaudio.PyAudio()  # Create an interface to PortAudio
 
-    print('Recording')
+    def record(self):
+        print('Start recording')
+        self.stream = self.p.open(format=self.sample_format,
+                        channels=self.channels,
+                        rate=self.fs,
+                        frames_per_buffer=self.chunk,
+                        input=True)
 
-    stream = p.open(format=sample_format,
-                    channels=channels,
-                    rate=fs,
-                    frames_per_buffer=chunk,
-                    input=True)
+        frames = []  # Initialize array to store frames
 
-    frames = []  # Initialize array to store frames
+        # Store data in chunks for 3 seconds
+        for i in range(0, int(self.fs / self.chunk * self.seconds)):
+            data = self.stream.read(self.chunk)
+            frames.append(data)
 
-    # Store data in chunks for 3 seconds
-    for i in range(0, int(fs / chunk * seconds)):
-        data = stream.read(chunk)
-        frames.append(data)
+        # Stop and close the stream
+        self.stream.stop_stream()
+        self.stream.close()
+        # Terminate the PortAudio interface
+        self.p.terminate()
 
-    # Stop and close the stream
-    stream.stop_stream()
-    stream.close()
-    # Terminate the PortAudio interface
-    p.terminate()
+        print('Finished recording')
 
-    print('Finished recording')
+        # Save the recorded data as a WAV file
+        wf = wave.open(self.path+self.file, 'wb')
+        wf.setnchannels(self.channels)
+        wf.setsampwidth(self.p.get_sample_size(self.sample_format))
+        wf.setframerate(self.fs)
+        wf.writeframes(b''.join(frames))
+        wf.close()
 
-    # Save the recorded data as a WAV file
-    wf = wave.open(filename, 'wb')
-    wf.setnchannels(channels)
-    wf.setsampwidth(p.get_sample_size(sample_format))
-    wf.setframerate(fs)
-    wf.writeframes(b''.join(frames))
-    wf.close()
+
+
+
 
 
 
