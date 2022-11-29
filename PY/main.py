@@ -1,9 +1,9 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
-from PyQt6.QtGui import QPixmap, QAction, QIcon
-from AUDIO import Recorder
-from WHISPER import WhisperModel
-from STABLE_DIFFIUSION import StableDiffiusion
+from PyQt6.QtGui import QPixmap, QIcon
+from ENGINE.PYAUDIO import Recorder
+from ENGINE.ASR_WHISPER import WhisperModel
+from ENGINE.PICGEN_STABLEDIFF import StableDiffiusion
 
 
 
