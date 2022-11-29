@@ -13,13 +13,13 @@ class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        icon = QIcon("../DATA/PIC/ALOHA.jpg")
+        icon = QIcon("DATA/PIC/ALOHA.jpg")
         self.setWindowIcon(icon)
         self.initializeAI()
         self.initializeUI()
     def initializeAI(self):
         self.whisper_model = WhisperModel(size='medium', lang='polish')
-        self.recorder_model = Recorder(length=10, path="../DATA/PHRASES/SPEAKING/",file='polish666.wav')
+        self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
         self.sd_model = StableDiffiusion(model_id="stabilityai/stable-diffusion-2")
     def initializeUI(self):
         self.setGeometry(50,50,250,400)
@@ -58,7 +58,7 @@ class MainWindow(QWidget):
         if (self.times_pressed_buttonrec % 2) == 0:
             self.buttonrec.setText("STOP RECORDING")
             self.buttonrec.adjustSize()
-            self.recorder_model = Recorder(length=10, path="../DATA/PHRASES/SPEAKING/", file='polish666.wav')
+            self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
             self.recorder_model.record()
             self.whisper_model.transcribe_file(path=self.recorder_model.path,file=self.recorder_model.file)
             self.transcription_label.setText(self.whisper_model.last_transcribe)
