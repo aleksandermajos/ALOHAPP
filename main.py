@@ -2,6 +2,7 @@ import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
 from PyQt6.QtGui import QPixmap, QIcon
 from ENGINE.PYAUDIO import Recorder
+from ENGINE.TTS_DE_SILERO import TTS_DE
 from ENGINE.ASR_WHISPER import WhisperModel
 from ENGINE.PICGEN_STABLEDIFF import StableDiffiusion
 
@@ -20,6 +21,7 @@ class MainWindow(QWidget):
     def initializeAI(self):
         self.whisper_model = WhisperModel(size='medium', lang='polish')
         self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+        self.tts_de = TTS_DE()
         self.sd_model = StableDiffiusion(model_id="stabilityai/stable-diffusion-2")
     def initializeUI(self):
         self.setGeometry(50,50,250,400)
@@ -60,6 +62,7 @@ class MainWindow(QWidget):
             self.buttonrec.adjustSize()
             self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
             self.recorder_model.record()
+            self.tts_de.create_and_save('Ich bin da')
             self.whisper_model.transcribe_file(path=self.recorder_model.path,file=self.recorder_model.file)
             self.transcription_label.setText(self.whisper_model.last_transcribe)
             self.translation_label.setText(self.whisper_model.last_translate)
