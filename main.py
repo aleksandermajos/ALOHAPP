@@ -4,7 +4,7 @@ from PyQt6.QtGui import QPixmap, QIcon
 from ENGINE.PYAUDIO import Recorder
 from ENGINE.TTS_DE_SILERO import TTS_DE
 from ENGINE.ASR_WHISPER import WhisperModel
-from ENGINE.PICGEN_STABLEDIFF import StableDiffiusion
+from ENGINE.FAIRQ_TRANSLATE import Translate
 
 
 
@@ -19,26 +19,31 @@ class MainWindow(QWidget):
         self.initializeAI()
         self.initializeUI()
     def initializeAI(self):
-        self.whisper_model = WhisperModel(size='medium', lang='polish')
         self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+        self.whisper_model = WhisperModel(size='medium', lang='polish')
+        self.translator = Translate()
         self.tts_de = TTS_DE()
-        self.sd_model = StableDiffiusion(model_id="stabilityai/stable-diffusion-2")
     def initializeUI(self):
-        self.setGeometry(50,50,250,400)
+        self.setGeometry(70,70,300,440)
         self.setWindowTitle("ALOHAPP!")
         self.setUpMainWindow()
 
         self.lbl = QLabel(self)
 
-        self.transcription_label = QLineEdit(self)
-        self.transcription_label.move(60, 110)
-        self.transcription_label.resize(140, 20)
-        self.transcription_label.textChanged[str].connect(self.onChanged)
+        self.orginal_label = QLineEdit(self)
+        self.orginal_label.move(60, 110)
+        self.orginal_label.resize(220, 20)
+        self.orginal_label.textChanged[str].connect(self.onChanged)
 
-        self.translation_label = QLineEdit(self)
-        self.translation_label.move(60, 150)
-        self.translation_label.resize(140, 20)
-        self.translation_label.textChanged[str].connect(self.onChanged)
+        self.english_label = QLineEdit(self)
+        self.english_label.move(60, 150)
+        self.english_label.resize(220, 20)
+        self.english_label.textChanged[str].connect(self.onChanged)
+
+        self.translated_label = QLineEdit(self)
+        self.translated_label.move(60, 190)
+        self.translated_label.resize(220, 20)
+        self.translated_label.textChanged[str].connect(self.onChanged)
 
 
         self.show()
@@ -60,13 +65,14 @@ class MainWindow(QWidget):
         if (self.times_pressed_buttonrec % 2) == 0:
             self.buttonrec.setText("STOP RECORDING")
             self.buttonrec.adjustSize()
-            self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+            self.recorder_model = Recorder(length=5, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
             self.recorder_model.record()
-            self.tts_de.create_and_save('Ich bin da')
             self.whisper_model.transcribe_file(path=self.recorder_model.path,file=self.recorder_model.file)
-            self.transcription_label.setText(self.whisper_model.last_transcribe)
-            self.translation_label.setText(self.whisper_model.last_translate)
-            self.sd_model.ask_and_save(self.translation_label.text(),self.translation_label.text()+'.png')
+            self.orginal_label.setText(self.whisper_model.last_transcribe)
+            self.english_label.setText(self.whisper_model.last_translate)
+            self.translated_label.setText(self.translator.translate(self.whisper_model.last_translate))
+            self.tts_de.create_and_save(self.translated_label.text())
+
 
     def onChanged(self, text):
         self.lbl.setText(text)
