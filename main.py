@@ -67,7 +67,7 @@ class MainWindow(QWidget):
         if (self.times_pressed_buttonrec % 2) == 0:
             self.buttonrec.setText("STOP RECORDING")
             self.buttonrec.adjustSize()
-            self.sound_recorder.record()
+            #self.sound_recorder.record()
             self.mic_recorder = Mic_Recorder(length=5, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
             self.mic_recorder.record()
             self.whisper_model.transcribe_file(path=self.mic_recorder.path, file=self.mic_recorder.file)
