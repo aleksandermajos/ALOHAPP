@@ -22,7 +22,7 @@ class MainWindow(QWidget):
     def initializeAI(self):
         self.mic_recorder = Mic_Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
         self.sound_recorder = Sound_recorder()
-        self.whisper_model = WhisperModel(size='medium', lang='polish')
+        self.whisper_model = WhisperModel(size='small', lang='polish')
         self.translator = Translate()
         self.tts_de = TTS_DE()
     def initializeUI(self):
