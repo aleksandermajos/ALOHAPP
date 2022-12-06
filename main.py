@@ -1,10 +1,11 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
 from PyQt6.QtGui import QPixmap, QIcon
-from ENGINE.PYAUDIO import Recorder
+from ENGINE.REC_MIC_PYAUDIO import Mic_Recorder
 from ENGINE.TTS_DE_SILERO import TTS_DE
 from ENGINE.ASR_WHISPER import WhisperModel
-from ENGINE.FAIRQ_TRANSLATE import Translate
+from ENGINE.TRANSLATE_EN_DE_FAIRQ import Translate
+from ENGINE.REC_SPEAKER import Sound_recorder
 
 
 
@@ -19,7 +20,8 @@ class MainWindow(QWidget):
         self.initializeAI()
         self.initializeUI()
     def initializeAI(self):
-        self.recorder_model = Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+        self.mic_recorder = Mic_Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+        self.sound_recorder = Sound_recorder()
         self.whisper_model = WhisperModel(size='medium', lang='polish')
         self.translator = Translate()
         self.tts_de = TTS_DE()
@@ -65,9 +67,10 @@ class MainWindow(QWidget):
         if (self.times_pressed_buttonrec % 2) == 0:
             self.buttonrec.setText("STOP RECORDING")
             self.buttonrec.adjustSize()
-            self.recorder_model = Recorder(length=5, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
-            self.recorder_model.record()
-            self.whisper_model.transcribe_file(path=self.recorder_model.path,file=self.recorder_model.file)
+            self.sound_recorder.record()
+            self.mic_recorder = Mic_Recorder(length=5, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+            self.mic_recorder.record()
+            self.whisper_model.transcribe_file(path=self.mic_recorder.path, file=self.mic_recorder.file)
             self.orginal_label.setText(self.whisper_model.last_transcribe)
             self.english_label.setText(self.whisper_model.last_translate)
             self.translated_label.setText(self.translator.translate(self.whisper_model.last_translate))
