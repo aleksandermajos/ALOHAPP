@@ -1,11 +1,11 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
 from PyQt6.QtGui import QPixmap, QIcon
-from ENGINE.REC_MIC_PYAUDIO import Mic_Recorder
-from ENGINE.TTS_DE_SILERO import TTS_DE
-from ENGINE.ASR_WHISPER import WhisperModel
-from ENGINE.TRANSLATE_EN_DE_FAIRQ import Translate
-from ENGINE.REC_SPEAKER import Sound_recorder
+from BUSINESS.NLP.REC_MIC_PYAUDIO import Mic_Recorder
+from BUSINESS.NLP.TTS_DE_SILERO import TTS_DE
+from BUSINESS.NLP.ASR_WHISPER import WhisperModel
+from BUSINESS.NLP.TRANSLATE_EN_DE_FAIRQ import Translate
+from BUSINESS.NLP.REC_SPEAKER import Sound_recorder
 
 
 
