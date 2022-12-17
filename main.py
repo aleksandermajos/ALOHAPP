@@ -6,6 +6,7 @@ from BUSINESS.NLP.TTS_DE_SILERO import TTS_DE
 from BUSINESS.NLP.ASR_WHISPER import WhisperModel
 from BUSINESS.NLP.TRANSLATE_EN_DE_FAIRQ import Translate
 from BUSINESS.NLP.REC_SPEAKER import Sound_recorder
+from BUSINESS.NLP.CHATGPT_UNOFFICIAL import Gadula
 
 
 
@@ -20,9 +21,10 @@ class MainWindow(QWidget):
         self.initializeAI()
         self.initializeUI()
     def initializeAI(self):
+        self.gadula = Gadula()
         self.mic_recorder = Mic_Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
         self.sound_recorder = Sound_recorder()
-        self.whisper_model = WhisperModel(size='small', lang='german')
+        self.whisper_model = WhisperModel(size='small', lang='polish')
         self.whisper_model.transcribe_all_in_dir(path="DATA/PHRASES/LISTENING/",fe='.mp3')
         self.translator = Translate()
         self.tts_de = TTS_DE()
@@ -69,13 +71,15 @@ class MainWindow(QWidget):
             self.buttonrec.setText("STOP RECORDING")
             self.buttonrec.adjustSize()
             #self.sound_recorder.record()
-            self.mic_recorder = Mic_Recorder(length=3, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
+            self.mic_recorder = Mic_Recorder(length=4, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
             self.mic_recorder.record()
             self.whisper_model.transcribe_file(path=self.mic_recorder.path, file=self.mic_recorder.file)
             self.orginal_label.setText(self.whisper_model.last_transcribe)
             self.english_label.setText(self.whisper_model.last_translate)
             self.translated_label.setText(self.translator.translate(self.whisper_model.last_translate))
             self.tts_de.create_and_save(self.translated_label.text())
+            resp=self.gadula.gada(self.translated_label.text())
+            self.tts_de.create_and_save(resp)
 
 
     def onChanged(self, text):
