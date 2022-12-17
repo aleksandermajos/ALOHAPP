@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ALOHAPP.iml" filepath="$PROJECT_DIR$/.idea/ALOHAPP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../BIGAI/.idea/BIGAI.iml" filepath="$PROJECT_DIR$/../BIGAI/.idea/BIGAI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Beginning-PyQt--second-edition/.idea/Beginning-PyQt--second-edition.iml" filepath="$PROJECT_DIR$/../Beginning-PyQt--second-edition/.idea/Beginning-PyQt--second-edition.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Modern_GUI_PyDracula_PySide6_or_PyQt6/.idea/Modern_GUI_PyDracula_PySide6_or_PyQt6.iml" filepath="$PROJECT_DIR$/../Modern_GUI_PyDracula_PySide6_or_PyQt6/.idea/Modern_GUI_PyDracula_PySide6_or_PyQt6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../QUANTMAVERICK/.idea/QUANTMAVERICK PROJECT.iml" filepath="$PROJECT_DIR$/../QUANTMAVERICK/.idea/QUANTMAVERICK PROJECT.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (BIGAI)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Beginning-PyQt--second-edition" />
+    <orderEntry type="module" module-name="Modern_GUI_PyDracula_PySide6_or_PyQt6" />
+    <orderEntry type="module" module-name="BIGAI" />
+    <orderEntry type="module" module-name="QUANTMAVERICK PROJECT" />
+  </component>
+</module>
