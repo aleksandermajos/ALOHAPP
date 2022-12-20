@@ -7,6 +7,11 @@ from BUSINESS.NLP.ASR_WHISPER import WhisperModel
 from BUSINESS.NLP.TRANSLATE_EN_DE_FAIRQ import Translate
 from BUSINESS.NLP.REC_SPEAKER import Sound_recorder
 #from BUSINESS.NLP.CHATGPT_UNOFFICIAL import Gadula
+from PyQt6.QtCore import Qt, QRegularExpression, QDate
+from PyQt6.QtGui import QFont, QRegularExpressionValidator
+from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
+    QPushButton, QDateEdit, QLineEdit, QTextEdit, QComboBox,
+    QFormLayout, QHBoxLayout)
 
 
 
@@ -32,6 +37,11 @@ class MainWindow(QWidget):
         self.setGeometry(70,70,400,250)
         self.setWindowTitle("ALOHAPP!")
         self.setUpMainWindow()
+        self.show()
+
+
+
+    def setUpMainWindow(self):
 
         self.lbl = QLabel(self)
 
@@ -51,24 +61,48 @@ class MainWindow(QWidget):
         self.german_label.textChanged[str].connect(self.onChanged)
 
 
-        self.show()
 
-    def setUpMainWindow(self):
         self.times_pressed_buttonrec_PL = 1
         self.times_pressed_buttonrec_UK = 1
         self.times_pressed_buttonrec_DE = 1
 
         self.buttonrec_PL = QPushButton("PL", self)
-        self.buttonrec_PL.move(60, 70)
+        self.buttonrec_PL.move(75, 140)
         self.buttonrec_PL.clicked.connect(self.buttonClicked_PL)
 
         self.buttonrec_UK = QPushButton("UK", self)
-        self.buttonrec_UK.move(140, 70)
+        self.buttonrec_UK.move(175, 140)
         self.buttonrec_UK.clicked.connect(self.buttonClicked_UK)
 
         self.buttonrec_DE = QPushButton("DE", self)
-        self.buttonrec_DE.move(220, 70)
+        self.buttonrec_DE.move(275, 140)
         self.buttonrec_DE.clicked.connect(self.buttonClicked_DE)
+
+
+
+        # Create horizontal layout for names
+        name_h_box = QHBoxLayout()
+        name_h_box.addWidget(self.buttonrec_PL)
+        name_h_box.addWidget(self.buttonrec_UK)
+        name_h_box.addWidget(self.buttonrec_DE)
+
+
+        main_form = QFormLayout()
+        main_form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        main_form.setFormAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignTop)
+        main_form.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
+
+
+        header_label = QLabel("ASKING")
+        header_label.setFont(QFont("Arial", 18))
+        header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        main_form.addRow(header_label)
+        main_form.addRow("TALK", self.talk_label)
+        main_form.addRow('ENGLISH', self.english_label)
+        main_form.addRow('GERMAN', self.german_label)
+        self.setLayout(main_form)
+
 
     def buttonClicked_PL(self):
         self.times_pressed_buttonrec_PL += 1
