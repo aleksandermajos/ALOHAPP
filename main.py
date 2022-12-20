@@ -12,6 +12,8 @@ from PyQt6.QtGui import QFont, QRegularExpressionValidator
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
     QPushButton, QDateEdit, QLineEdit, QTextEdit, QComboBox,
     QFormLayout, QHBoxLayout)
+from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
+    QLineEdit, QCheckBox, QTextEdit, QGridLayout)
 
 
 
@@ -34,7 +36,7 @@ class MainWindow(QWidget):
         self.translator = Translate()
         self.tts_de = TTS_DE()
     def initializeUI(self):
-        self.setGeometry(70,70,400,250)
+        self.setGeometry(0,0,1200,300)
         self.setWindowTitle("ALOHAPP!")
         self.setUpMainWindow()
         self.show()
@@ -79,29 +81,18 @@ class MainWindow(QWidget):
         self.buttonrec_DE.clicked.connect(self.buttonClicked_DE)
 
 
-
-        # Create horizontal layout for names
-        name_h_box = QHBoxLayout()
-        name_h_box.addWidget(self.buttonrec_PL)
-        name_h_box.addWidget(self.buttonrec_UK)
-        name_h_box.addWidget(self.buttonrec_DE)
-
-
         main_form = QFormLayout()
-        main_form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
-        main_form.setFormAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignTop)
-        main_form.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
-
 
         header_label = QLabel("ASKING")
         header_label.setFont(QFont("Arial", 18))
-        header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        header_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         main_form.addRow(header_label)
         main_form.addRow("TALK", self.talk_label)
         main_form.addRow('ENGLISH', self.english_label)
         main_form.addRow('GERMAN', self.german_label)
         self.setLayout(main_form)
+
 
 
     def buttonClicked_PL(self):
