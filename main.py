@@ -7,6 +7,7 @@ from BUSINESS.NLP.TTS_FR_SILERO import TTS_FR
 from BUSINESS.NLP.ASR_WHISPER import WhisperModel
 from BUSINESS.NLP.TRANSLATE_EN_DE_FAIRQ import Translate_EN_DE
 from BUSINESS.NLP.TRANSLATE_EN_FR_FAIRQ import Translate_EN_FR
+from BUSINESS.NLP.TRANSLATE_EN_FR_NEMO import Translate_EN_FR_NEMO
 from BUSINESS.NLP.REC_SPEAKER import Sound_recorder
 from PyQt6.QtCore import Qt, QRegularExpression, QDate
 from PyQt6.QtGui import QFont, QRegularExpressionValidator
@@ -31,10 +32,10 @@ class MainWindow(QWidget):
     def initializeAI(self):
         self.mic_recorder = Mic_Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
         self.sound_recorder = Sound_recorder()
-        self.whisper_model = WhisperModel(size='small', lang='german')
+        self.whisper_model = WhisperModel(size='medium', lang='german')
         #self.whisper_model.transcribe_all_in_dir(path="DATA/PHRASES/LISTENING/",fe='.mp3')
         self.translator_en_de = Translate_EN_DE()
-        self.translator_en_fr = Translate_EN_FR()
+        self.translator_en_fr = Translate_EN_FR_NEMO()
         self.tts_de = TTS_DE()
         self.tts_fr = TTS_FR()
     def initializeUI(self):
@@ -130,6 +131,8 @@ class MainWindow(QWidget):
             self.english_label.setText(self.whisper_model.last_translate)
             self.german_label.setText(self.translator_en_de.translate(self.whisper_model.last_translate))
             self.french_label.setText(self.translator_en_fr.translate(self.whisper_model.last_translate))
+            self.tts_de = TTS_DE()
+            self.tts_fr = TTS_FR()
             self.tts_de.create_and_save(self.german_label.text())
             self.tts_fr.create_and_save(self.french_label.text())
 
@@ -154,6 +157,8 @@ class MainWindow(QWidget):
             self.english_label.setText(self.whisper_model.last_transcribe)
             self.german_label.setText(self.translator_en_de.translate(self.whisper_model.last_transcribe))
             self.french_label.setText(self.translator_en_fr.translate(self.whisper_model.last_transcribe))
+            self.tts_de = TTS_DE()
+            self.tts_fr = TTS_FR()
             self.tts_de.create_and_save(self.german_label.text())
             self.tts_fr.create_and_save(self.french_label.text())
 
@@ -178,6 +183,8 @@ class MainWindow(QWidget):
             self.english_label.setText(self.whisper_model.last_translate)
             self.german_label.setText(self.whisper_model.last_transcribe)
             self.french_label.setText(self.translator_en_fr.translate(self.whisper_model.last_translate))
+            self.tts_de = TTS_DE()
+            self.tts_fr = TTS_FR()
             self.tts_de.create_and_save(self.german_label.text())
             self.tts_fr.create_and_save(self.french_label.text())
 
@@ -202,6 +209,8 @@ class MainWindow(QWidget):
             self.english_label.setText(self.whisper_model.last_translate)
             self.german_label.setText(self.translator_en_de.translate(self.whisper_model.last_translate))
             self.french_label.setText(self.whisper_model.last_transcribe)
+            self.tts_de = TTS_DE()
+            self.tts_fr = TTS_FR()
             self.tts_de.create_and_save(self.german_label.text())
             self.tts_fr.create_and_save(self.french_label.text())
 
