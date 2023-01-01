@@ -2,8 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../handson-ml3" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../machine-learning-book" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../practical-statistics-for-data-scientists" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../QUANTMAVERICK" vcs="Git" />
   </component>
 </project>
