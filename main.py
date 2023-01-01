@@ -1,21 +1,17 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
 from PyQt6.QtGui import QPixmap, QIcon
 from BUSINESS.NLP.REC_MIC_PYAUDIO import Mic_Recorder
 from BUSINESS.NLP.TTS_DE_SILERO import TTS_DE
 from BUSINESS.NLP.TTS_FR_SILERO import TTS_FR
 from BUSINESS.NLP.ASR_WHISPER import WhisperModel
 from BUSINESS.NLP.TRANSLATE_EN_DE_FAIRQ import Translate_EN_DE
-from BUSINESS.NLP.TRANSLATE_EN_FR_FAIRQ import Translate_EN_FR
 from BUSINESS.NLP.TRANSLATE_EN_FR_NEMO import Translate_EN_FR_NEMO
 from BUSINESS.NLP.REC_SPEAKER import Sound_recorder
-from PyQt6.QtCore import Qt, QRegularExpression, QDate
-from PyQt6.QtGui import QFont, QRegularExpressionValidator
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import (QPushButton, QFormLayout)
 from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
-    QPushButton, QDateEdit, QLineEdit, QTextEdit, QComboBox,
-    QFormLayout, QHBoxLayout)
-from PyQt6.QtWidgets import (QApplication, QWidget, QLabel,
-    QLineEdit, QCheckBox, QTextEdit, QGridLayout)
+                             QLineEdit)
 
 
 
@@ -32,7 +28,7 @@ class MainWindow(QWidget):
     def initializeAI(self):
         self.mic_recorder = Mic_Recorder(length=10, path="DATA/PHRASES/SPEAKING/", file='polish666.wav')
         self.sound_recorder = Sound_recorder()
-        self.whisper_model = WhisperModel(size='medium', lang='german')
+        self.whisper_model = WhisperModel(size='small', lang='german')
         #self.whisper_model.transcribe_all_in_dir(path="DATA/PHRASES/LISTENING/",fe='.mp3')
         self.translator_en_de = Translate_EN_DE()
         self.translator_en_fr = Translate_EN_FR_NEMO()

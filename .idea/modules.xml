@@ -6,6 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/../BIGAI/.idea/BIGAI.iml" filepath="$PROJECT_DIR$/../BIGAI/.idea/BIGAI.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Beginning-PyQt--second-edition/.idea/Beginning-PyQt--second-edition.iml" filepath="$PROJECT_DIR$/../Beginning-PyQt--second-edition/.idea/Beginning-PyQt--second-edition.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Modern_GUI_PyDracula_PySide6_or_PyQt6/.idea/Modern_GUI_PyDracula_PySide6_or_PyQt6.iml" filepath="$PROJECT_DIR$/../Modern_GUI_PyDracula_PySide6_or_PyQt6/.idea/Modern_GUI_PyDracula_PySide6_or_PyQt6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../handson-ml3/.idea/handson-ml3.iml" filepath="$PROJECT_DIR$/../handson-ml3/.idea/handson-ml3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../machine-learning-book/.idea/machine-learning-book.iml" filepath="$PROJECT_DIR$/../machine-learning-book/.idea/machine-learning-book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../practical-statistics-for-data-scientists/.idea/practical-statistics-for-data-scientists.iml" filepath="$PROJECT_DIR$/../practical-statistics-for-data-scientists/.idea/practical-statistics-for-data-scientists.iml" />
     </modules>
   </component>
 </project>
